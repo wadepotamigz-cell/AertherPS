@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Application Form</title>
+<style>
+/* Body & Background */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    color: #fff;
+}
+
+/* Container */
+.container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    padding: 40px 35px;
+    margin: 50px 15px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    width: 100%;
+    max-width: 500px;
+    transition: transform 0.3s ease;
+}
+
+.container:hover {
+    transform: translateY(-3px);
+}
+
+/* Heading */
+h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 25px;
+    color: #fff;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+}
+
+/* Form Labels */
+form label {
+    font-weight: 600;
+    color: #e0e0e0;
+}
+
+/* Inputs & Textarea */
+input[type="text"],
+input[type="email"],
+input[type="number"],
+textarea {
+    width: 100%;
+    padding: 12px 15px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+textarea:focus {
+    border-color: #8d46ff;
+    background: rgba(255,255,255,0.15);
+    outline: none;
+    box-shadow: 0 0 8px rgba(141, 70, 255, 0.6);
+}
+
+/* Button */
+button {
+    background: linear-gradient(135deg, #5b5bff, #8d46ff);
+    color: #fff;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(120, 30, 255, 0.4);
+}
+
+/* Submitted Data */
+h3 {
+    margin-top: 30px;
+    color: #fff;
+    text-align: center;
+    font-size: 1.4rem;
+}
+
+.submitted-data {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 20px;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 15px;
+    line-height: 1.6;
+    word-wrap: break-word;
+    backdrop-filter: blur(5px);
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+    text-align: left;
+}
+
+/* Disabled overlay for form */
+.form-disabled {
+    pointer-events: none;
+    opacity: 0.6;
+    position: relative;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 35px 25px;
+        margin: 40px 10px;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    h3 {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 25px 15px;
+        margin: 30px 10px;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    h3 {
+        font-size: 1.2rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    textarea {
+        font-size: 14px;
+        padding: 10px 12px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 12px 16px;
+    }
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <h2>Aether Staff Application Form</h2>
+
+    <form id="applicationForm">
+        <label for="name">Discord Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">In-Game Name:</label>
+        <input type="text" id="email" name="email" required>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" min="1" required>
+
+        <label for="message">Why should we choose you?</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+
+        <button type="submit">Submit Application</button>
+    </form>
+
+    <h3>Submitted Data:</h3>
+    <div id="result" class="submitted-data"></div>
+</div>
+
+<script>
+const form = document.getElementById('applicationForm');
+const resultDiv = document.getElementById('result');
+
+// Remove all limits — always allow submission
+form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const age = document.getElementById('age').value;
+    const message = document.getElementById('message').value;
+
+    // Just display the submitted data
+    resultDiv.innerHTML = `
+        <p><strong>Discord Name:</strong> ${name}</p>
+        <p><strong>In-Game Name:</strong> ${email}</p>
+        <p><strong>Age:</strong> ${age}</p>
+        <p><strong>Message:</strong> ${message}</p>
+    `;
+
+    // Reset form after submission
+    form.reset();
+});
+</script>
+</body>
+</html>
